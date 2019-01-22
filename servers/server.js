@@ -38,9 +38,10 @@ io.on('connection',(socket)=>{
 
 
 //CHECK CAMLOG FOR STATUS
+//when active disables socket 'switch'
 setInterval(()=>{
 	fs.readFile('python/camlog.txt', (err, data) => { 
-		if (err) console.log("ERR");
+		if (err) console.log("ERROR READING camlog.txt");
 		else{
 			swtch=data.toString();
 			if(swtch!==''){

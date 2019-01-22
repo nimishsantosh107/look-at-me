@@ -26,7 +26,7 @@ while True: # We repeat infinitely (until break):
     _, frame = video_capture.read() # We get the last frame.
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) # We do some colour transformations.
     canvas = detect(gray, frame) # We get the output of our detect function.
-    cv2.imshow('Video', canvas) # We display the outputs.
+    #cv2.imshow('Video', canvas) # We display the outputs. UNCOMMENT TO SHOW LIVE FEED
     if cv2.waitKey(1) & 0xFF == ord('q'): # If we type on the keyboard:
         break # We stop the loop.
 

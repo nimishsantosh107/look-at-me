@@ -1,4 +1,6 @@
 //TEST FILE TO TEST CONCEPTS
+
+//print camlog every 0.5 seconds
 const fs = require('fs');
 
 setInterval(()=>{
