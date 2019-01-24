@@ -10,3 +10,9 @@ GO TO /
 RUN node/servers/server.js
 GO TO /
 RUN misc/testlog.js
+
+
+//INSTALL ROBOTJS , IOHOOK
+ sudo npm install robotjs --save --unsafe-perm
+ sudo npm install iohook --save --unsafe-perm
+ sudo npm install node-hid --save --unsafe-perm

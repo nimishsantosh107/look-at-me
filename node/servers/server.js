@@ -3,9 +3,13 @@ const http = require('http');
 const socketIO = require('socket.io');
 const path = require('path');
 const fs = require('fs');
+const robot = require("robotjs");
+const ioHook = require('iohook');
+const { execFile } = require('child_process');
+const { spawn } = require('child_process');
 
 const publicPath = path.join(__dirname,'../public');
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 var app = express();
 var server = http.createServer(app);
@@ -15,6 +19,9 @@ var sockArr = [];
 var swtch = 'Y';
 var cur = 0;
 
+
+//ROUTES
+//first route(/)
 app.use(express.static(publicPath));
 
 io.on('connection',(socket)=>{
@@ -27,7 +34,6 @@ io.on('connection',(socket)=>{
 	
 	socket.on('new',(str)=>{
 		io.sockets.connected[sockArr[cur]].emit('data',str);
-		//socket.broadcast.emit('data',str)
 	});
 
 	socket.on('disconnect' ,()=>{
@@ -37,8 +43,8 @@ io.on('connection',(socket)=>{
 });
 
 
-//CHECK CAMLOG FOR STATUS
-//when active disables socket 'switch'
+// CHECK CAMLOG FOR STATUS
+// when active disables socket 'switch'
 setInterval(()=>{
 	fs.readFile('python/camlog.txt', (err, data) => { 
 		if (err) console.log("ERROR READING camlog.txt");
@@ -57,4 +63,5 @@ setInterval(()=>{
 	});
 },500);
 
-server.listen(port,'192.168.1.6',()=>{console.log(`SERVER UP ON ${port}`);});
+//Run server
+server.listen(port,'192.168.1.2',()=>{console.log(`SERVER UP ON ${port}`);});
