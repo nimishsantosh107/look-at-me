@@ -3,8 +3,8 @@ const http = require('http');
 const socketIO = require('socket.io');
 const path = require('path');
 const fs = require('fs');
-//const robot = require("robotjs");
-//const ioHook = require('iohook');
+const robot = require("robotjs");
+const ioHook = require('iohook');
 //const { execFile } = require('child_process');
 //const { spawn } = require('child_process');
 
@@ -22,20 +22,21 @@ var cur = 0;
 
 //ROUTES
 //first route(/)
-app.use(express.static(publicPath));
+app.use(express.static(publicPath+'/index'));
 
 io.on('connection',(socket)=>{
 	console.log(`${socket.id} CONNECTED`);
 	sockArr.push(socket.id);
 
+	//ONLY FOR SITE
 	socket.on('switch',()=>{
 		cur+=1;
 		if(cur > (sockArr.length)-1){cur = 0;}
 	});
-	
 	socket.on('new',(str)=>{
 		io.sockets.connected[sockArr[cur]].emit('data',str);
 	});
+	//ONLY FOR SITE
 
 	socket.on('disconnect' ,()=>{
 		var ind = sockArr.indexOf(socket.id);

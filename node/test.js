@@ -3,19 +3,21 @@ const ioHook = require('iohook');
 const HID = require('node-hid');
 
 //HID FOR MOUSE INPUT
-// var devices = HID.devices();
-// var mouseInfo = devices.find((d)=>{
-//     var mouseUSB = d.vendorId===7247 && d.productId===3;  //zebronics usb mouse
-//     return mouseUSB;
-// });
-// //console.log(mouse)
-// var mouse = new HID.HID( mouseInfo.path );
+var devices = HID.devices();
+//console.log(devices);
 
-// mouse.on("data", function(data) {
-// 	console.log(data.toString('hex'))
-// });
+var mouseInfo = devices.find((d)=>{
+    var mouseUSB = d.vendorId===7247 && d.productId===3;  //zebronics usb mouse
+    return mouseUSB;
+});
+//console.log(mouse)
+var mouse = new HID.HID( mouseInfo.path );
 
-// robot.moveMouse(200,200);
+mouse.on("data", function(data) {
+	console.log(data.toString('hex'))
+});
+
+robot.moveMouse(200,200);
 
 /*IOHOOK*/
 // ioHook.on('mousemove', (event) => {

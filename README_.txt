@@ -6,9 +6,9 @@ GO TO /python
 RUN face_recog.py IN ENV virtual_platform
 
 RUN WITHOUT VIRTUAL ENV
-GO TO /
+GO TO /node/
 CHANGE PORT OF server.js
-RUN node/servers/server.js
+RUN node server/servers/server.js
 GO TO /
 RUN misc/testlog.js
 
