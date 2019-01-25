@@ -3,10 +3,10 @@ const http = require('http');
 const socketIO = require('socket.io');
 const path = require('path');
 const fs = require('fs');
-const robot = require("robotjs");
-const ioHook = require('iohook');
-const { execFile } = require('child_process');
-const { spawn } = require('child_process');
+//const robot = require("robotjs");
+//const ioHook = require('iohook');
+//const { execFile } = require('child_process');
+//const { spawn } = require('child_process');
 
 const publicPath = path.join(__dirname,'../public');
 const port = 3000;
@@ -46,7 +46,7 @@ io.on('connection',(socket)=>{
 // CHECK CAMLOG FOR STATUS
 // when active disables socket 'switch'
 setInterval(()=>{
-	fs.readFile('python/camlog.txt', (err, data) => { 
+	fs.readFile('./../python/camlog.txt', (err, data) => { 
 		if (err) console.log("ERROR READING camlog.txt");
 		else{
 			swtch=data.toString();
@@ -64,4 +64,4 @@ setInterval(()=>{
 },500);
 
 //Run server
-server.listen(port,'192.168.1.2',()=>{console.log(`SERVER UP ON ${port}`);});
+server.listen(port,'192.168.1.8',()=>{console.log(`SERVER UP ON ${port}`);});

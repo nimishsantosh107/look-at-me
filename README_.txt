@@ -1,12 +1,13 @@
 SET UP VIRTUAL ENV USING YAML(.yml INSIDE misc)
 conda env create -f <YAML FILE>
 
-SOURCE ACTIVATE virtual_platform
+SOURCE ACTIVATE virtual_platform(CAN RUN W/O ENV)
 GO TO /python
 RUN face_recog.py IN ENV virtual_platform
 
 RUN WITHOUT VIRTUAL ENV
 GO TO /
+CHANGE PORT OF server.js
 RUN node/servers/server.js
 GO TO /
 RUN misc/testlog.js
