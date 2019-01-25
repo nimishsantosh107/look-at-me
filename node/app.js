@@ -8,9 +8,10 @@ let mainWindow;
 app.on('ready',()=>{
 	mainWindow = new BrowserWindow({});
 
-	mainWindow.loadURL(url.format({
-		pathname: path.join(__dirname,'/appViews/index/index.html'),
-		protocol: 'file:',
-		slashes: true,
-	}));
+	// mainWindow.loadURL(url.format({
+	// 	pathname: path.join(__dirname,'/appViews/index/index.html'),
+	// 	protocol: 'file:',
+	// 	slashes: true,
+	// }));
+	mainWindow.loadURL('https://www.youtube.com');
 });

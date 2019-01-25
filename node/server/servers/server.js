@@ -25,6 +25,7 @@ var cur = 0;
 app.use(express.static(publicPath));
 
 io.on('connection',(socket)=>{
+	console.log(`${socket.id} CONNECTED`);
 	sockArr.push(socket.id);
 
 	socket.on('switch',()=>{
@@ -38,6 +39,7 @@ io.on('connection',(socket)=>{
 
 	socket.on('disconnect' ,()=>{
 		var ind = sockArr.indexOf(socket.id);
+		console.log(`${socket.id} DISCONNECTED`);
 		sockArr.splice(ind,1);
 	});
 });
