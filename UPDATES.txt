@@ -12,4 +12,4 @@ NODE
 PYTHON
 	eye_track.py-		* works
 	face_recog.py-		* works (ACTIVE: logs)
-	face_eye_recog.py-	* FIX 
+	face_eye_recog.py-	* EYE DETECTION BOUNDARY WRONG
