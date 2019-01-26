@@ -43,11 +43,11 @@ while 1:
       cv2.rectangle(frame, (x,y), ((x+w),(y+h)), (0,0,255),1)  #draw rectangle around eyes
       cv2.line(frame, (x,y), ((x+w,y+h)), (0,0,255),1)   #draw cross
       cv2.line(frame, (x+w,y), ((x,y+h)), (0,0,255),1)
-      pupilFrame = cv2.equalizeHist(frame[y+(h*.25):(y+h), x:(x+w)]) #using histogram equalization of better image. 
+      pupilFrame = cv2.equalizeHist(frame[y+int((h*.25)):(y+h), x:(x+w)]) #using histogram equalization of better image. 
       cl1 = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8)) #set grid size
       clahe = cl1.apply(pupilFrame)  #clahe
       blur = cv2.medianBlur(clahe, 7)  #median blur
-      circles = cv2.HoughCircles(blur ,cv2.cv.CV_HOUGH_GRADIENT,1,20,param1=50,param2=30,minRadius=7,maxRadius=21) #houghcircles
+      circles = cv2.HoughCircles(blur ,cv2.HOUGH_GRADIENT,1,20,param1=50,param2=30,minRadius=7,maxRadius=21) #houghcircles
       if circles is not None: #if atleast 1 is detected
         circles = np.round(circles[0, :]).astype("int") #change float to integer
         print ('integer',circles)
@@ -62,8 +62,8 @@ while 1:
 
     #frame = cv2.medianBlur(frame,5)
     cv2.imshow('image',pupilFrame)
-    cv2.imshow('clahe', clahe)
-    cv2.imshow('blur', blur)
+    #cv2.imshow('clahe', clahe)
+    #cv2.imshow('blur', blur)
 
     
     if cv2.waitKey(1) & 0xFF == ord('q'):

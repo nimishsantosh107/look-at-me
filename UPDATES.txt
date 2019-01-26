@@ -10,4 +10,4 @@ NODE
 		SERVERS-
 			server.js	* browser funcitonality to local app
 PYTHON
-	eyecontol.py-		* doesn't work
+	eyecontol.py-		* works but change functionality
