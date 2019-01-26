@@ -1,0 +1,13 @@
+MISC-NULL
+NODE
+	app.js-				* app is currently client only app
+						* iohook not importing
+						* interior socket not connecting(app-server to app-index.html)
+	
+	package.json- 		* cmake-js added
+
+	SERVER-	
+		SERVERS-
+			server.js	* browser funcitonality to local app
+PYTHON
+	eyecontol.py-		* doesn't work

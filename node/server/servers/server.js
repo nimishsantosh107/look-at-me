@@ -9,7 +9,7 @@ const ioHook = require('iohook');
 //const { spawn } = require('child_process');
 
 const publicPath = path.join(__dirname,'../public');
-const port = 3000;
+const port = 1000;
 
 var app = express();
 var server = http.createServer(app);
@@ -24,20 +24,28 @@ var cur = 0;
 //first route(/)
 app.use(express.static(publicPath+'/index'));
 
+
+//IO CONNECTION AND EVENTS
 io.on('connection',(socket)=>{
 	console.log(`${socket.id} CONNECTED`);
 	sockArr.push(socket.id);
 
-	//ONLY FOR SITE
+	
+
+
+	//ONLY FOR SITE(ctrl+shift)
 	socket.on('switch',()=>{
 		cur+=1;
 		if(cur > (sockArr.length)-1){cur = 0;}
 	});
+	//EMIT ONLY TO CUR
 	socket.on('new',(str)=>{
 		io.sockets.connected[sockArr[cur]].emit('data',str);
 	});
-	//ONLY FOR SITE
 
+
+
+	//DISCONNECTION
 	socket.on('disconnect' ,()=>{
 		var ind = sockArr.indexOf(socket.id);
 		console.log(`${socket.id} DISCONNECTED`);
@@ -67,4 +75,4 @@ setInterval(()=>{
 },500);
 
 //Run server
-server.listen(port,'192.168.1.8',()=>{console.log(`SERVER UP ON ${port}`);});
+server.listen(port,'192.168.1.5',()=>{console.log(`SERVER UP ON ${port}`);});

@@ -1,0 +1,15 @@
+h1{
+	color: #fff;
+	font-family: arial;
+}
+
+body{
+	background-color: #616161;
+}
+
+#code {
+	background-color: #262526;
+	color: #0CE800;
+	font-family: courier;
+	font-size: 14px;
+}

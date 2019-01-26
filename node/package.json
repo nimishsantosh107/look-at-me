@@ -17,5 +17,9 @@
     "socket.io-client": "^2.2.0"
   },
   "devDependencies": {},
-  "description": ""
+  "description": "",
+  "cmake-js": {
+    "runtime": "electron",
+    "runtimeVersion": "4.0.2"
+  }
 }
