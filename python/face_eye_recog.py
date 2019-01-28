@@ -16,7 +16,7 @@ def detect(gray, frame): # We create a function that takes as input the image in
             #for (ex, ey, ew, eh) in eyes: # For each detected eye:
             (ex, ey, ew, eh) = eyes[0]
             cv2.rectangle(roi_color,(ex, ey),(ex+ew, ey+eh), (0, 255, 0), 2) # We paint a rectangle around the eyes, but inside the referential of the face.
-            roi = roi_color[ex: ey, ex+ew: ey+eh]
+            roi = roi_color[ex: ex+ew, ey: ey+eh]
             rows, cols, _ = roi.shape
             gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
             gray_roi = cv2.GaussianBlur(gray_roi, (7, 7), 0)
@@ -48,7 +48,7 @@ while True: # We repeat infinitely (until break):
     _, frame = video_capture.read() # We get the last frame.
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) # We do some colour transformations.
     canvas = detect(gray, frame) # We get the output of our detect function.
-    # cv2.imshow('Video', canvas) # We display the outputs.
+    cv2.imshow('Video', canvas) # We display the outputs.
     if cv2.waitKey(1) & 0xFF == ord('q'): # If we type on the keyboard:
         break # We stop the loop.
 

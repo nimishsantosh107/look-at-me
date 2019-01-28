@@ -8,7 +8,7 @@ while True:
     if ret is False:
         break
 
-    #roi = frame[269: 795, 537: 1416]
+    roi = frame[269: 795, 537: 1416]
     roi = frame
     rows, cols, _ = roi.shape
     gray_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
