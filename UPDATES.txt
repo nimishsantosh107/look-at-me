@@ -13,3 +13,4 @@ PYTHON
 	eye_track.py-		* works
 	face_recog.py-		* works (ACTIVE: logs)
 	face_eye_recog.py-	* EYE DETECTION BOUNDARY WRONG
+	**BETTER EYE TRACK NEEDED**
