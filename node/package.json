@@ -8,7 +8,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^4.0.2",
     "express": "^4.16.4",
     "iohook": "^0.3.1",
     "node-hid": "^0.7.6",

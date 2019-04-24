@@ -5,8 +5,6 @@ const path = require('path');
 const fs = require('fs');
 const robot = require("robotjs");
 const ioHook = require('iohook');
-//const { execFile } = require('child_process');
-//const { spawn } = require('child_process');
 
 const publicPath = path.join(__dirname,'../public');
 const port = 1000;
@@ -16,12 +14,14 @@ var server = http.createServer(app);
 var io = socketIO(server);
 
 var sockArr = [];
+//CURRENTLY ONLY 2 (y/n)
 var swtch = 'Y';
 var cur = 0;
 
 
 //ROUTES
 //first route(/)
+//FOR WEBSITE THING ONLY
 app.use(express.static(publicPath+'/index'));
 
 
@@ -30,9 +30,8 @@ io.on('connection',(socket)=>{
 	console.log(`${socket.id} CONNECTED`);
 	sockArr.push(socket.id);
 
-	
 
-
+//********
 	//ONLY FOR SITE(ctrl+shift)
 	socket.on('switch',()=>{
 		cur+=1;
@@ -40,9 +39,10 @@ io.on('connection',(socket)=>{
 	});
 	//EMIT ONLY TO CUR
 	socket.on('new',(str)=>{
+		//the following (io.sockets.connected is an arr of socket ids)
 		io.sockets.connected[sockArr[cur]].emit('data',str);
 	});
-
+//********
 
 
 	//DISCONNECTION
@@ -74,5 +74,5 @@ setInterval(()=>{
 	});
 },500);
 
-//Run server
-server.listen(port,'192.168.1.5',()=>{console.log(`SERVER UP ON ${port}`);});
+//RUN SERVER
+server.listen(port,'192.168.1.*',()=>{console.log(`SERVER UP ON ${port}`);});
