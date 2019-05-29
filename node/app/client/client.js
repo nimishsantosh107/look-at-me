@@ -11,7 +11,7 @@ var IP = '';
 app.listen(4000,()=>{
 	console.log('SERVER UP ON PORT 5000');
 
-	var iocc = ioc(`http://${IP}:3000`);
+	var iocc = ioc(`http://${IP}:1000`);
 	iocc.on('connect',()=>{
 		console.log('CONNECTED TO MAIN');
 
