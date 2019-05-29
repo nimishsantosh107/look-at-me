@@ -6,10 +6,12 @@ const ioHook = require('iohook');
 
 var app = express();
 
-app.listen(5000,()=>{
+var IP = '';
+
+app.listen(4000,()=>{
 	console.log('SERVER UP ON PORT 5000');
 
-	var iocc = ioc("http://192.168.1.5:3000");
+	var iocc = ioc(`http://${IP}:3000`);
 	iocc.on('connect',()=>{
 		console.log('CONNECTED TO MAIN');
 

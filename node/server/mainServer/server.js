@@ -6,8 +6,8 @@ const fs = require('fs');
 const robot = require("robotjs");
 const ioHook = require('iohook');
 
-const publicPath = path.join(__dirname,'../public');
-const port = 1000;
+const PORT = 1000;
+const IP = '';
 
 var app = express();
 var server = http.createServer(app);
@@ -18,13 +18,6 @@ var sockArr = [];
 var swtch = 'Y';
 var cur = 0;
 
-
-//ROUTES
-//first route(/)
-//FOR WEBSITE THING ONLY
-app.use(express.static(publicPath+'/index'));
-
-
 //IO CONNECTION AND EVENTS
 io.on('connection',(socket)=>{
 	console.log(`${socket.id} CONNECTED`);
@@ -32,11 +25,6 @@ io.on('connection',(socket)=>{
 
 
 //********
-	//ONLY FOR SITE(ctrl+shift)
-	socket.on('switch',()=>{
-		cur+=1;
-		if(cur > (sockArr.length)-1){cur = 0;}
-	});
 	//EMIT ONLY TO CUR
 	socket.on('new',(str)=>{
 		//the following (io.sockets.connected is an arr of socket ids)
@@ -55,7 +43,6 @@ io.on('connection',(socket)=>{
 
 
 // CHECK CAMLOG FOR STATUS
-// when active disables socket 'switch'
 setInterval(()=>{
 	fs.readFile('./../python/camlog.txt', (err, data) => { 
 		if (err) console.log("ERROR READING camlog.txt");
@@ -75,4 +62,4 @@ setInterval(()=>{
 },500);
 
 //RUN SERVER
-server.listen(port,'192.168.1.*',()=>{console.log(`SERVER UP ON ${port}`);});
+server.listen(PORT,IP,()=>{console.log(`SERVER UP ON ${port}`);});
