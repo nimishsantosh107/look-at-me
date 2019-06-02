@@ -4,24 +4,33 @@ const socketIO = require('socket.io');
 const path = require('path');
 const fs = require('fs');
 const robot = require("robotjs");
-const ioHook = require('iohook');
 
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
 
-const PORT = 1000;
-const IP = '';
+const PORT = 3000;
+const IP = '192.168.0.13';
 var sockArr = [];
 
 //CURRENTLY ONLY 2 (y/n)
 var swtch = 'Y';
 var cur = 0;
 
+//SETTING OBJ TO MOUSE POS
+var obj = {}
+setInterval(()=>{
+	var mouse = robot.getMousePos();
+	obj.x = mouse.x;
+	obj.y = mouse.y;
+},10);
+
+
 //IO CONNECTION AND EVENTS
 io.on('connection',(socket)=>{
 	console.log(`${socket.id} CONNECTED`);
 	sockArr.push(socket.id);
+
 
 //********
 	//EMIT ONLY TO CUR
@@ -29,6 +38,11 @@ io.on('connection',(socket)=>{
 		//the following (io.sockets.connected is an arr of socket ids)
 		io.sockets.connected[sockArr[cur]].emit('data',str);
 	});
+
+	//CONTINUOUSLY EMIT  to CUR = 0
+	setInterval(()=>{
+		io.sockets.connected[sockArr[cur]].emit('data',obj);
+	},10)
 //********
 
 	//DISCONNECTION
@@ -66,4 +80,4 @@ setInterval(()=>{
 },500);
 
 //RUN SERVER
-server.listen(PORT,IP,()=>{console.log(`SERVER UP ON ${port}`);});
+server.listen(PORT,IP,()=>{console.log(`SERVER UP ON ${PORT}`);});
