@@ -40,9 +40,9 @@ io.on('connection',(socket)=>{
 	});
 
 	//CONTINUOUSLY EMIT  to CUR = 0
-	setInterval(()=>{
-		io.sockets.connected[sockArr[cur]].emit('data',obj);
-	},10)
+	// setInterval(()=>{
+	// 	io.sockets.connected[sockArr[cur]].emit('data',obj);
+	// },10)
 //********
 
 	//DISCONNECTION
@@ -61,11 +61,11 @@ io.on('connection',(socket)=>{
 
 // CHECK CAMLOG FOR STATUS
 setInterval(()=>{
-	fs.readFile('./../python/camlog.txt', (err, data) => { 
+	fs.readFile('./../../../python/camlog.txt', (err, data) => { 
 		if (err) console.log("ERROR READING camlog.txt");
 		else{
 			swtch=data.toString();
-			
+			console.log(swtch);
 			if(swtch!==''){
 				if(swtch==='Y')
 					cur=0;
